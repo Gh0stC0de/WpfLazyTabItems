@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LazyTabItems"
-             xmlns:vm="clr-namespace:LazyTabItems.ViewModels"
              xmlns:view="clr-namespace:LazyTabItems.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -18,42 +17,48 @@
             <Label Content="{Binding Item.Name, StringFormat='Master Item: {0}'}" />
         </StackPanel>
         <TabControl Grid.Row="1"
-                    ItemsSource="{Binding TabItemSource}"
-                    SelectedItem="{Binding SelectedTab}"
-                    VerticalAlignment="Stretch">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Header}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ContentControl Content="{Binding ViewModel}">
-                        <ContentControl.Resources>
-                            <DataTemplate DataType="{x:Type vm:ViewModelB}">
-                                <ContentControl>
-                                    <view:ViewB />
-                                </ContentControl>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type vm:ViewModelC}">
-                                <ContentControl>
-                                    <view:ViewC />
-                                </ContentControl>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type vm:ViewModelD}">
-                                <ContentControl>
-                                    <view:ViewD />
-                                </ContentControl>
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type vm:MultiRegionViewModel}">
-                                <ContentControl>
-                                    <view:MultiRegionView />
-                                </ContentControl>
-                            </DataTemplate>
-                        </ContentControl.Resources>
+                    SelectedItem="{Binding SelectedTab}">
+            <TabItem DataContext="{Binding TabViewModels[0]}"
+                     IsSelected="True">
+                <TabItem.Header>
+                    <Label Content="Tab B" />
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl>
+                        <view:ViewB />
                     </ContentControl>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem DataContext="{Binding TabViewModels[1]}">
+                <TabItem.Header>
+                    <Label Content="Tab C" />
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl>
+                        <view:ViewC />
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem DataContext="{Binding TabViewModels[2]}">
+                <TabItem.Header>
+                    <Label Content="Tab D" />
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl>
+                        <view:ViewD />
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem DataContext="{Binding TabViewModels[3]}">
+                <TabItem.Header>
+                    <Label Content="Tab Multi Region" />
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl>
+                        <view:MultiRegionView />
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

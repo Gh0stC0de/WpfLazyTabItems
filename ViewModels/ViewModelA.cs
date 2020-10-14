@@ -1,29 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using LazyTabItems.Models;
 
 namespace LazyTabItems.ViewModels
 {
     public class ViewModelA : ViewModelBase
     {
-        private TabItemData _selectedTab;
+        private TabItem _selectedTab;
         private MasterItem _item;
 
         public ViewModelA()
         {
-            TabItemSource = new List<TabItemData>
+            TabViewModels = new List<object>
             {
-                new TabItemData {Header = "Tab B", ViewModel = new ViewModelB()},
-                new TabItemData {Header = "Tab C", ViewModel = new ViewModelC()},
-                new TabItemData {Header = "Tab D", ViewModel = new ViewModelD()},
-                new TabItemData {Header = "Multi Regions", ViewModel = new MultiRegionViewModel{ParentViewModel = this}},
+                new ViewModelB(),
+                new ViewModelC(),
+                new ViewModelD(),
+                new MultiRegionViewModel{ParentViewModel = this},
             };
-            SelectedTab = TabItemSource.FirstOrDefault();
         }
 
-        public IList<TabItemData> TabItemSource { get; set; }
+        public IList<object> TabViewModels { get; set; }
 
-        public TabItemData SelectedTab
+        public TabItem SelectedTab
         {
             get => _selectedTab;
             set
@@ -32,7 +32,7 @@ namespace LazyTabItems.ViewModels
                 if (_selectedTab != value)
                 {
                     _selectedTab = value;
-                    OnSelectedTabChanged(oldTab, _selectedTab);
+                    OnSelectedTabChanged(oldTab?.DataContext, _selectedTab.DataContext);
                 }
             }
         }
@@ -51,17 +51,17 @@ namespace LazyTabItems.ViewModels
             }
         }
 
-        private void OnSelectedTabChanged(TabItemData oldTabItemData, TabItemData tabItemData)
+        private void OnSelectedTabChanged(object oldTabDataContext, object selectedTabDataContext)
         {
-            if (oldTabItemData != null && oldTabItemData.ViewModel is IActiveAware oldActiveAware) oldActiveAware.IsActive = false;
-            if (tabItemData != null && tabItemData.ViewModel is IActiveAware activeAware) activeAware.IsActive = true;
+            if (oldTabDataContext != null && oldTabDataContext is IActiveAware oldActiveAware) oldActiveAware.IsActive = false;
+            if (selectedTabDataContext != null && selectedTabDataContext is IActiveAware activeAware) activeAware.IsActive = true;
         }
 
         private void OnItemChanged(MasterItem item)
         {
-            var dependentViewModels = TabItemSource
-                .Where(i => i.ViewModel is IDetailViewModel<MasterItem>)
-                .Select(i => i.ViewModel)
+            var dependentViewModels = TabViewModels
+                .Where(i => i is IDetailViewModel<MasterItem>)
+                .Select(i => i)
                 .Cast<IDetailViewModel<MasterItem>>();
 
             foreach (var viewModel in dependentViewModels)
