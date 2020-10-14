@@ -15,7 +15,8 @@ namespace LazyTabItems.ViewModels
             {
                 new TabItemData {Header = "Tab B", ViewModel = new ViewModelB()},
                 new TabItemData {Header = "Tab C", ViewModel = new ViewModelC()},
-                new TabItemData {Header = "Tab D", ViewModel = new ViewModelD()}
+                new TabItemData {Header = "Tab D", ViewModel = new ViewModelD()},
+                new TabItemData {Header = "Multi Regions", ViewModel = new MultiRegionViewModel{ParentViewModel = this}},
             };
             SelectedTab = TabItemSource.FirstOrDefault();
         }

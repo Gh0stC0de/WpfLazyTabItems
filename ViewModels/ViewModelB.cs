@@ -37,6 +37,8 @@ namespace LazyTabItems.ViewModels
             MasterChanged?.Invoke(this, master);
         }
 
+        public object ParentViewModel { get; set; }
+
         public bool IsActive
         {
             get => _isActive;

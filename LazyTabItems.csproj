@@ -60,6 +60,9 @@
     <Compile Include="Models\MasterItem.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\MasterViewModel.cs" />
+    <Compile Include="ViewModels\MultiRegionViewModel.cs" />
+    <Compile Include="ViewModels\RegionEViewModel.cs" />
+    <Compile Include="ViewModels\RegionFViewModel.cs" />
     <Compile Include="ViewModels\ViewModelB.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelD.cs" />
@@ -68,6 +71,15 @@
     <Compile Include="ViewModels\ViewModelA.cs" />
     <Compile Include="Views\MasterView.xaml.cs">
       <DependentUpon>MasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MultiRegionView.xaml.cs">
+      <DependentUpon>MultiRegionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegionEView.xaml.cs">
+      <DependentUpon>RegionEView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegionFView.xaml.cs">
+      <DependentUpon>RegionFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewA.xaml.cs">
       <DependentUpon>ViewA.xaml</DependentUpon>
@@ -94,6 +106,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MultiRegionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegionEView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegionFView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

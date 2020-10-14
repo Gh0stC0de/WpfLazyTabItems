@@ -45,6 +45,11 @@
                                     <view:ViewD />
                                 </ContentControl>
                             </DataTemplate>
+                            <DataTemplate DataType="{x:Type vm:MultiRegionViewModel}">
+                                <ContentControl>
+                                    <view:MultiRegionView />
+                                </ContentControl>
+                            </DataTemplate>
                         </ContentControl.Resources>
                     </ContentControl>
                 </DataTemplate>

@@ -6,5 +6,6 @@ namespace LazyTabItems
     {
         event EventHandler<T> MasterChanged;
         void RaiseMasterChanged(T master);
+        object ParentViewModel { get; set; }
     }
 }
